@@ -16,7 +16,8 @@ This project describes how to install Ehcache as a third-party level-2 cache in 
 
 `vi ehcache-terracotta.xml`
 
-
+  * set terracottaConfig url
+  * define cache 
 
 3. modify tc-conf.xml and start terracotta server
 
