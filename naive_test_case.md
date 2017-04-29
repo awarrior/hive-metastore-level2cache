@@ -10,13 +10,15 @@ https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManu
 * hive-cli-2: `desc xxx;`
 * hive-cli-1: `desc xxx;`
 
-# add/drop table column
+# add table column
 
 * hive-cli-1: `drop table if exists xxx;`
 * hive-cli-1: `create table xxx(a int);`
 * hive-cli-2: `alter table xxx add columns (b bigint);`
 * hive-cli-2: `desc xxx;`
 * hive-cli-1: `desc xxx;`
+
+# drop table column
 
 * hive-cli-1: `drop table if exists xxx;`
 * hive-cli-1: `create table xxx(a int);`
