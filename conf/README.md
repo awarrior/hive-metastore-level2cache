@@ -1,3 +1,3 @@
-# 
+# ehcache/terracotta related xml files
 
-in /hive/conf
+mv ehcache-terracotta.xml /hive/conf
