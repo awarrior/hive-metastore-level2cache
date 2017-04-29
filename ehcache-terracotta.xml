@@ -820,9 +820,9 @@ Here is an example of CacheManager level resource tuning, which will use up to 4
          <persistence strategy="localRestartable"/>
      </cache>
      -->
-	<cache name="basicCachex" 
-		maxEntriesLocalHeap="0"
-		eternal="false">
-		<!--pinning store="inCache"/-->
-	</cache>
+     <cache name="basicCachex" 
+           maxBytesLocalHeap="200m"
+	   eternal="false">
+         <terracotta/>
+     </cache>
 </ehcache>
