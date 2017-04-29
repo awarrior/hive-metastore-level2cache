@@ -44,3 +44,7 @@ This project describes how to install Ehcache as a third-party level-2 cache in 
   * try to initialize class once not in the local map
   * repackage datanucleus-core-4.1.6.jar in /hive/lib
   
+6. validation
+
+  * see naive_test_case.md
+
