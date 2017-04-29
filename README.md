@@ -1,6 +1,6 @@
-# hive-metastore-level2cache
+# hive-metastore-level2cache-distributed
 
-This project describes how to install Ehcache as a third-party level-2 cache in the DataNucleus module used by Hive metastore.
+This project describes how to install Ehcache as a third-party Level-2 cache in the DataNucleus module used by Hive metastore. I deployed Ehcache using Terracotta server to meet distributed needs. The reason why I plug this module in Hive is to solve metadata consistence problem in multi-metastore running environment. Depending on the distributed cache realization of Terracotta server, Ehcache can replace the original SOFT/WEAK type of Level-2 cache in Hive for metadata visiting cost.
 
 # procedure
 
