@@ -46,5 +46,5 @@ This project describes how to install Ehcache as a third-party level-2 cache in 
   
 6. validation
 
-  * see naive_test_case.md
+  * read naive_test_case.md
 
