@@ -35,3 +35,10 @@ This project describes how to install Ehcache as a third-party level-2 cache in 
   * datanucleus.cache.level2.configurationFile=/ehcache-terracotta.xml
   * datanucleus.cache.level2.cacheName=basicCache
   * hive.metastore.cache.pinobjtypes= (leave one space)
+
+5. fix datanucleus bug about using local Map\<Class,Meta\> but running in ehcache distributed way
+
+`vi EnhancementHelper.java`
+
+  * try to initialize class not in the local map
+  
