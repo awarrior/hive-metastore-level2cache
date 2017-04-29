@@ -18,7 +18,7 @@ https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManu
 * hive-cli-2: `desc xxx;`
 * hive-cli-1: `desc xxx;`
 
-# drop table column
+# modify table column
 
 * hive-cli-1: `drop table if exists xxx;`
 * hive-cli-1: `create table xxx(a int);`
