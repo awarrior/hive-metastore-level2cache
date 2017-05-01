@@ -488,8 +488,12 @@ public class EnhancementHelper extends java.lang.Object
             // try to register class once
             try {
                 pcClass.newInstance();
-                ret = registeredClasses.get(pcClass);
-            } catch (Exception e) {
+            } catch (InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            ret = registeredClasses.get(pcClass);
+            // throw exception if null exactly
+            if (ret == null) {
                 throw new NucleusUserException("Cannot lookup meta info for " + pcClass + " - nothing found").setFatal();
             }
         }
