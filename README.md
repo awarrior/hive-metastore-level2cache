@@ -11,15 +11,23 @@ This project describes how to install Ehcache as a third-party Level-2 cache in 
   * datanucleus-cache-4.0.5.jar  # add third-party cache extendibility to DataNucleus
   * ehcache-2.10.3.jar  # cache module
   * terracotta-toolkit-runtime-4.3.4.jar  # support terracotta cache server
+  
+2. fix datanucleus[4.1.6] bug about using local Map\<Class,Meta\> but running in ehcache distributed way
 
-2. modify ehcache-terracotta.xml and move to /hive/conf
+`vi EnhancementHelper.java`
+
+  * modify - Meta getMeta(Class pcClass)
+  * try to initialize class once not in the local map
+  * repackage datanucleus-core-4.1.6.jar in /hive/lib
+
+3. modify ehcache-terracotta.xml and move to /hive/conf
 
 `vi ehcache-terracotta.xml`
 
   * set terracottaConfig url
   * define cache 
 
-3. modify tc-conf.xml and start terracotta server
+4. modify tc-conf.xml and start terracotta server
 
 `vi tc-conf.xml`
 
@@ -27,7 +35,7 @@ This project describes how to install Ehcache as a third-party Level-2 cache in 
   
 `terracotta-4.3.4/server/bin/start-tc-server.sh -f tc-config.xml`
 
-4. modify hive-site.xml and start hive cli to validate
+5. modify hive-site.xml and start hive cli to validate
 
 `vi hive-site.xml`
 
@@ -35,14 +43,6 @@ This project describes how to install Ehcache as a third-party Level-2 cache in 
   * datanucleus.cache.level2.configurationFile=/ehcache-terracotta.xml
   * datanucleus.cache.level2.cacheName=basicCache
   * hive.metastore.cache.pinobjtypes= (leave one space)
-
-5. fix datanucleus[4.1.6] bug about using local Map\<Class,Meta\> but running in ehcache distributed way
-
-`vi EnhancementHelper.java`
-
-  * modify - Meta getMeta(Class pcClass)
-  * try to initialize class once not in the local map
-  * repackage datanucleus-core-4.1.6.jar in /hive/lib
   
 6. validation
 
