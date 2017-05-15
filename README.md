@@ -4,7 +4,7 @@ This project describes how to install Ehcache as a third-party Level-2 cache in 
 
 # procedure
 
-1. add jars
+1. add jars (hive clients/metastore servers)
 
 `mv [jar] /hive/lib`
 
@@ -12,7 +12,7 @@ This project describes how to install Ehcache as a third-party Level-2 cache in 
   * ehcache-2.10.3.jar  # cache module
   * terracotta-toolkit-runtime-4.3.4.jar  # support terracotta cache server
   
-2. fix datanucleus[4.1.6] bug about using local Map\<Class,Meta\> but running in ehcache distributed way
+2. fix datanucleus[4.1.6] bug about using local Map\<Class,Meta\> but running in ehcache distributed way (hive clients/metastore servers)
 
 `vi EnhancementHelper.java`
 
@@ -20,22 +20,23 @@ This project describes how to install Ehcache as a third-party Level-2 cache in 
   * try to initialize class once not in the local map
   * repackage datanucleus-core-4.1.6.jar in /hive/lib
 
-3. modify ehcache-terracotta.xml and move to /hive/conf
+3. modify ehcache-terracotta.xml and move to /hive/conf (hive clients)
 
 `vi ehcache-terracotta.xml`
 
-  * set terracottaConfig url
+  * set terracottaConfig url like \<terracottaConfig url="ip:port" /\>
   * define cache 
 
 4. modify tc-conf.xml and start terracotta server
 
 `vi tc-conf.xml`
 
-  * set server host in tc-conf.xml
+  * define one server host or sever array in tc-conf.xml
+  * set data/logs storage directories
   
 `terracotta-4.3.4/server/bin/start-tc-server.sh -f tc-config.xml`
 
-5. modify hive-site.xml and start hive cli to validate
+5. modify hive-site.xml and start hive cli to validate (metastore servers)
 
 `vi hive-site.xml`
 
