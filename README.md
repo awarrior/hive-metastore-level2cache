@@ -49,3 +49,10 @@ This project describes how to install Ehcache as a third-party Level-2 cache in 
 
   * read testcase/functional_test.md
 
+# performance
+
+To ehcache+terracotta across hive metastore server, for single Table(hive) object, the read speed through 1 PC (8 cores) can reach 30,675 times per second, and the write speed can reach more than 5,219 times per second.
+
+To hive metastore server with ehcache+terracotta, for single Table object, the read speed through 1 PC slows down to 121 times per second, and the write speed is 46 times per second. Even though we add 2 more PCs, the read/write speed does not change obviously (so that we know the bottleneck isn't in the client endpoint).
+
+The cache mode explained above only owns 14% read speed of SOFT level2-cache type in metastore, but nearly the same to cache write speed. That is the question waiting to research.
