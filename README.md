@@ -24,14 +24,14 @@ This project describes how to install Ehcache as a third-party Level-2 cache in 
 
 `vi ehcache-terracotta.xml`
 
-  * set terracottaConfig url like \<terracottaConfig url="ip:port" /\>
+  * set terracottaConfig url like \<terracottaConfig url="ip1:port1,ip2:port2" /\>
   * define cache 
 
 4. modify tc-conf.xml and start terracotta server
 
 `vi tc-conf.xml`
 
-  * define one server host or sever array in tc-conf.xml
+  * define one server host or sever array (copy \<server\> config) in tc-conf.xml
   * set data/logs storage directories
   
 `terracotta-4.3.4/server/bin/start-tc-server.sh -f tc-config.xml`
@@ -47,5 +47,5 @@ This project describes how to install Ehcache as a third-party Level-2 cache in 
   
 6. validation
 
-  * read naive_test_case.md
+  * read testcase/functional_test.md
 
