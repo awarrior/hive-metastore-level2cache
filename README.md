@@ -12,13 +12,15 @@ This project describes how to install Ehcache as a third-party Level-2 cache in 
   * ehcache-2.10.3.jar  # cache module
   * terracotta-toolkit-runtime-4.3.4.jar  # support terracotta cache server
   
-2. fix datanucleus[4.1.6] bug about using local Map\<Class,Meta\> but running in ehcache distributed way (hive clients/metastore servers)
+2. fix datanucleus-4.1.6 bug about using local Map\<Class,Meta\> but running in ehcache distributed way (hive clients/metastore servers)
 
 `vi EnhancementHelper.java`
 
   * modify - Meta getMeta(Class pcClass)
   * try to initialize class once not in the local map
   * repackage datanucleus-core-4.1.6.jar in /hive/lib
+
+P.S. The original method throws 'Cannot lookup meta info for class xxx - nothing found' exception in the second metastore service startup, because Datanucleus notices the missing class had been registered before (in the first metastore) through distributed cache so that it doesn't register again. Without local save, the second metastore startup find nothing for meta info initialization.
 
 3. modify ehcache-terracotta.xml and move to /hive/conf (hive clients)
 
@@ -44,6 +46,8 @@ This project describes how to install Ehcache as a third-party Level-2 cache in 
   * datanucleus.cache.level2.configurationFile=/ehcache-terracotta.xml
   * datanucleus.cache.level2.cacheName=basicCache
   * hive.metastore.cache.pinobjtypes= (leave one space)
+  
+P.S. The reason why I set pinobjtypes null is that 'pinAll(Class,boolean) method not supported by this plugin'. Maybe this will be supported if we add pinAll realization.
   
 6. validation
 
