@@ -1,0 +1,34 @@
+diff --git a/src/main/java/org/datanucleus/enhancer/EnhancementHelper.java b/src/main/java/org/datanucleus/enhancer/EnhancementHelper.java
+index 6b0bcd6c..521e16df 100644
+--- a/src/main/java/org/datanucleus/enhancer/EnhancementHelper.java
++++ b/src/main/java/org/datanucleus/enhancer/EnhancementHelper.java
+@@ -156,11 +156,29 @@ public class EnhancementHelper extends java.lang.Object
+      */
+     public Persistable newInstance(Class pcClass, StateManager sm)
+     {
++		// check whether pcClass has been loaded
++		checkClassLoad(pcClass);
++
+         Meta meta = getMeta(pcClass);
+         Persistable pcInstance = meta.getPC();
+         return pcInstance == null ? null : pcInstance.dnNewInstance(sm);
+     }
+ 
++	private void checkClassLoad(Class pcClass) 
++	{
++	    if (registeredClasses.get(pcClass) == null) 
++	    {
++	        try 
++	        {
++	            Class.forName(pcClass.getName());
++	        } 
++	        catch (ClassNotFoundException e) 
++	        {
++	            throw new NucleusUserException("Cannot lookup meta Class for " + pcClass + " - nothing found");
++	        }
++	    }
++	}
++
+     /**
+      * Create a new instance of the class and assign its StateManager and key values from the
+      * ObjectId. If the oid parameter is <code>null</code>, no key values are copied. The new instance has its
