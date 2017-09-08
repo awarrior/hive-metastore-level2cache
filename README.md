@@ -47,7 +47,7 @@ P.S. The original method throws 'Cannot lookup meta info for class xxx - nothing
   * datanucleus.cache.level2.cacheName=basicCache
   * hive.metastore.cache.pinobjtypes= (leave one space)
   
-P.S. The reason why I set pinobjtypes null is that 'pinAll(Class,boolean) method not supported by this plugin'. Maybe this will be supported if we add pinAll realization.
+P.S. The reason why I set pinobjtypes null is that 'pinAll(Class,boolean) method not supported by this plugin'. Ehcache plugin can support pinning setting for any cache block but specified objects.
   
 6. validation
 
