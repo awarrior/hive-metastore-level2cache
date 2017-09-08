@@ -41,7 +41,7 @@ P.S. The reason why I set pinobjtypes null is that 'pinAll(Class,boolean) method
   
 6. validation
 
-  * read testcase/functional_test.md
+  * read testcase/README.md
 
 # performance
 
