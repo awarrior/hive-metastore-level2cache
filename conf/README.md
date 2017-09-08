@@ -1,10 +1,10 @@
-# important config in ehcache-terracotta.xml
+# ehcache-terracotta.xml
 
 * basic cache property
 
 maxBytesLocalHeap (must smaller than the metastore server jvm maximum heap size)
 
-# important config in terracotta.xml
+# tc-config.xml
 
 * install terracotta cache array
 
@@ -12,6 +12,8 @@ maxBytesLocalHeap (must smaller than the metastore server jvm maximum heap size)
 
 `<server host="192.168.56.102" name="tc_server2" bind="0.0.0.0">...</server>`
 
-* change heap size of terracotta by modifying server/bin/start-tc-server.sh
+# server/bin/start-tc-server.sh
+
+* change heap size of terracotta 
 
 `eval ${JAVA_COMMAND} -Xms4g -Xmx4g -XX:+HeapDumpOnOutOfMemoryError \`
