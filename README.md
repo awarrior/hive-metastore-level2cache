@@ -17,6 +17,8 @@ This project describes how to install Ehcache as a third-party Level-2 cache in 
 
 P.S. The original method throws 'Cannot lookup meta info for class xxx - nothing found' exception in the second metastore service startup, because Datanucleus fetching Class object from distributed cache does not load that Class and register in the second metastore.
 
+https://github.com/datanucleus/datanucleus-core/pull/260
+
 3. modify `ehcache-terracotta.xml` and move to hive conf (hive clients)
 
   * set terracottaConfig url like \<terracottaConfig url="ip1:port1,ip2:port2" /\>
