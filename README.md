@@ -15,7 +15,7 @@ This project describes how to install Ehcache as a third-party Level-2 cache in 
   * patch `EnhancementHelper.java` with `EnhancementHelper.patch`
   * repackage `datanucleus-core-4.1.6.jar` and move to hive lib
 
-P.S. The original method throws 'Cannot lookup meta info for class xxx - nothing found' exception in the second metastore service startup, because Datanucleus fetching Class object from distributed cache does not load that Class and register in the second metastore.
+P.S. The exception named 'Cannot lookup meta info for class xxx - nothing found' is threw out at the startup of second Hive Metastore service. The reason I found is that Datanucleus fetches Class object from distributed cache through Ehcache and get its metadata directly which is not loaded and registered locally in the second Hive Metastore.
 
 https://github.com/datanucleus/datanucleus-core/pull/260
 
