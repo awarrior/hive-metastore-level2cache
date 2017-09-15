@@ -61,9 +61,9 @@ public class HMSHandlerCacheTest {
         int linesLen = lines.size();
 
         BlockingQueue<Runnable> bq = new LinkedBlockingQueue<>();
-        double readratioFold = 2 * readratio - 1;
+        double readratioExpand = 2 * readratio - 1;
         for (int i = 0; i < tasknum; ++i) {
-            boolean write = r1.nextDouble() < readratioFold;
+            boolean write = r1.nextDouble() < readratioExpand;
             String[] rstr = lines.get((int) r2.nextDouble() * linesLen).split(",");
             if (rstr.length != 2) {
                 System.err.println("meta data format must be db,tbl");
