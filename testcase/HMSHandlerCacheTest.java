@@ -37,7 +37,9 @@ public class HMSHandlerCacheTest {
 
         FileReader fr;
         try {
-            fr = new FileReader("DBxTBL.txt");
+            // select b.NAME,a.TBL_NAME from TBLS a join DBS b on a.DB_ID=b.DB_ID
+            // into outfile '/var/lib/mysql-files/DBxTBL.csv' fields terminated by ',' lines terminated by '\n';
+            fr = new FileReader("DBxTBL.csv");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return;
