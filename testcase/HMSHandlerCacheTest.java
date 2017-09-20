@@ -10,10 +10,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.*;
 
 public class HMSHandlerCacheTest {
@@ -53,7 +50,8 @@ public class HMSHandlerCacheTest {
 
         // initialize executor
         ExecutorService ex = new ThreadPoolExecutor(minWorkerThreads, maxWorkerThreads,
-                60, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
+                60, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+//                new SynchronousQueue<Runnable>());
 
         // read db,tbl lines
         FileReader fr;
@@ -150,7 +148,5 @@ public class HMSHandlerCacheTest {
                 e.printStackTrace();
             }
         }
-
     }
-
 }
