@@ -28,9 +28,9 @@ startServers() {
 ./sshCmd.sh ${servers[0]} "${shpath}/startTCServer.sh gbd_tc_server1 ${logpath}/tcserver.log"
 ./sshCmd.sh ${servers[1]} "${shpath}/startTCServer.sh gbd_tc_server2 ${logpath}/tcserver.log"
 }
-jarname="CacheTestDist.jar"
-classname="CacheTestDist"
-acmd="java -cp $jarname:$HIVE_CONF_DIR:`hadoop classpath`:$HIVE_LIB/* $classname 32 10000"
+jarname="cachetest.jar"
+classname="HMSHandlerCacheTest"
+acmd="java -cp $jarname:$HIVE_CONF_DIR:`hadoop classpath`:$HIVE_LIB/* $classname 400 1000 10000"
 iterate() {
 killServers;startServers
 $acmd 1.0 $seeds
@@ -41,7 +41,7 @@ $acmd 0.5 $seeds
 }
 
 # loop
-seeds="0 0 0";iterate
-seeds="1 1 1";iterate
-seeds="2 2 2";iterate
+seeds="0 0";iterate
+seeds="1 1";iterate
+seeds="2 2";iterate
 ### TEST LOOP ###
