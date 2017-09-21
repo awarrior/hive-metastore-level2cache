@@ -1,16 +1,15 @@
 import org.apache.hadoop.hive.conf.HiveConf;
 import org.apache.hadoop.hive.metastore.HiveMetaStore;
-import org.apache.hadoop.hive.metastore.api.FieldSchema;
-import org.apache.hadoop.hive.metastore.api.MetaException;
-import org.apache.hadoop.hive.metastore.api.StorageDescriptor;
-import org.apache.hadoop.hive.metastore.api.Table;
-import org.apache.thrift.TException;
+import org.apache.hadoop.hive.metastore.api.*;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.*;
 
 public class HMSHandlerCacheTest {
@@ -20,8 +19,10 @@ public class HMSHandlerCacheTest {
     static {
         HiveConf hiveConf = new HiveConf(HMSHandlerCacheTest.class);
         hiveConf.addResource("hive-site.xml");
+        System.out.println("meta->" + hiveConf.get("javax.jdo.option.ConnectionURL"));
         try {
             baseHandler = new HiveMetaStore.HMSHandler("CacheTest", hiveConf, false);
+            baseHandler.init();
         } catch (MetaException e) {
             e.printStackTrace();
         }
@@ -84,7 +85,7 @@ public class HMSHandlerCacheTest {
         double readratioUnroll = 2 * readratio - 1;
         for (int i = 0; i < tasknum; ++i) {
             boolean write = r1.nextDouble() < readratioUnroll;
-            String[] rstr = lines.get((int) r2.nextDouble() * linesLen).split(",");
+            String[] rstr = lines.get((int) (r2.nextDouble() * linesLen)).split(",");
             if (rstr.length != 2) {
                 System.err.println("meta data format must be db,tbl");
                 return;
@@ -144,8 +145,8 @@ public class HMSHandlerCacheTest {
                     cols.get(ridx).setName("_cache_" + ridx);
                     baseHandler.alter_table(db, tbl, tbl2);
                 }
-            } catch (TException e) {
-                e.printStackTrace();
+            } catch (Throwable t) {
+                t.printStackTrace();
             }
         }
     }
